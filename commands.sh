@@ -2,9 +2,19 @@
 echo "Greetings from canine"
 
 print_help(){
-    echo "It seems as though no arguments were passed, you can run one of the following commands next"
+    echo "Not enough arguments were passed. You can do one of the following next."
     echo "help: Prints the help screen"
     echo "install: prepares installation"
+}
+
+print_cluster_help(){
+    echo "It seems as though no arguments were passed, you can run one of the following commands next"
+    echo "create: Creates a new cluster"
+    echo "delete: Deletes the current cluster"
+}
+
+create_cluster(){
+    kubeadm init
 }
 
 prepare_install(){
@@ -59,10 +69,19 @@ install_k8s(){
     echo "$(cat kubectl.sha256)  kubectl" | sha256sum --check
     sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
     chmod +x /usr/local/bin/kubectl
+
+    echo "Task 2: Completed"
+
+    echo "Enabling kubelet service"
+    systemctl enable kubelet.service
+
     kubeadm version
     kubectl version
 
-    # still have to update config.yml
+    echo "Kubernetes has been installed on your machine, and the kubectl tool as well."
+
+    echo "Please note that the local config files - canine have not been updated yet, this will be fixed with future releases."
+    # have to update config.yml file
 } 
 
 
@@ -79,7 +98,24 @@ elif [ $1 == "install" ]
 then
     prepare_install
     install_k8s
+elif [ $1 == "cluster" ]
+then
+    if [ $# -ne 2 ]
+    then
+        print_cluster_help
+        exit 0
+    fi
+    if [ $2 == "create" ]
+    then
+        create_cluster
+    elif [ $2 == "delete" ]
+    then
+        echo "Deleting cluster"
+    else
+        print_cluster_help
+    fi
 else
+    print_help
     echo "please enter the command that you would want to run"
 fi
 
