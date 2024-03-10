@@ -1,0 +1,1 @@
+Execute `source ./main.sh`.
