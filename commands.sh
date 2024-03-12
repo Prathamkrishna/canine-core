@@ -84,6 +84,12 @@ install_k8s(){
     # have to update config.yml file
 } 
 
+install_calico(){
+    kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.27.2/manifests/tigera-operator.yaml
+    kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.27.2/manifests/custom-resources.yaml
+
+}
+
 
 if [ $# -eq 0 ]
 then
@@ -113,6 +119,12 @@ then
         echo "Deleting cluster"
     else
         print_cluster_help
+    fi
+elif [ $1 == "network" ]
+then
+    if [ $2 == "calico" ]
+    then
+        install_calico
     fi
 else
     print_help
