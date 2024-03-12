@@ -12,9 +12,11 @@ chmod +x kube-apiserver kube-controller-manager kube-scheduler kubectl
 sudo mv kube-apiserver kube-controller-manager kube-scheduler kubectl /usr/local/bin/
 
 sudo mkdir -p /var/lib/kubernetes/
+cd certs
 sudo mv ca.pem ca-key.pem kubernetes-key.pem kubernetes.pem \
   service-account-key.pem service-account.pem \
   encryption-config.yaml /var/lib/kubernetes/
+cd ..
 
 INTERNAL_IP="127.0.0.1"
 

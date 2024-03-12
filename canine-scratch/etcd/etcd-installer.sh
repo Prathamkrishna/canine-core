@@ -8,8 +8,9 @@ sudo mv etcd-v3.5.12-linux-${ARCH}/etcd* /usr/local/bin/
 
 sudo mkdir -p /etc/etcd /var/lib/etcd
 sudo chmod 700 /var/lib/etcd
+cd certs
 sudo cp ca.pem kubernetes-key.pem kubernetes.pem /etc/etcd/
-
+cd ..
 
 INTERNAL_IP="127.0.0.1"
 ETCD_NAME="etcd-cluster"
