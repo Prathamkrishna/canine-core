@@ -13,18 +13,12 @@ sudo mv kube-apiserver kube-controller-manager kube-scheduler /usr/local/bin/
 sudo mkdir -p /var/lib/kubernetes/
 cd certs
 sudo mv ca.pem ca-key.pem kubernetes-key.pem kubernetes.pem \
-  service-account-key.pem service-account.pem \
+  service-account-key.pem service-account.pem encryption-config.yaml kube-controller-manager.kubeconfig kube-scheduler.kubeconfi \
   /var/lib/kubernetes/
 cd ..
 
-mv encryption-config.yaml /var/lib/kubernetes
-
 INTERNAL_IP="127.0.0.1"
-cd certs
-sudo mv kube-controller-manager.kubeconfig /var/lib/kubernetes/
-sudo mv kube-scheduler.kubeconfig /var/lib/kubernetes/
 sudo mv kube-scheduler.yaml /etc/kubernetes/config/
-cd ..
 
 cat <<EOF | sudo tee /etc/systemd/system/kube-apiserver.service
 [Unit]

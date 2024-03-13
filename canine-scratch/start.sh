@@ -9,6 +9,6 @@ cd etcd
 source etcd-installer.sh
 cd ..
 cd certs
-source generate-cluster-components-configs.sh
+source ../generate-cluster-components-configs.sh
 cd ..
 source bootstrap-kubernetes-controller.sh
