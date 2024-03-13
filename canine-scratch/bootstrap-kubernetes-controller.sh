@@ -5,24 +5,26 @@ ARCH="arm64"
 wget -q --show-progress --https-only --timestamping \
   "https://storage.googleapis.com/kubernetes-release/release/v1.28.0/bin/linux/${ARCH}/kube-apiserver" \
   "https://storage.googleapis.com/kubernetes-release/release/v1.28.0/bin/linux/${ARCH}/kube-controller-manager" \
-  "https://storage.googleapis.com/kubernetes-release/release/v1.28.0/bin/linux/${ARCH}/kube-scheduler" \
-  "https://storage.googleapis.com/kubernetes-release/release/v1.28.0/bin/linux/${ARCH}/kubectl"
+  "https://storage.googleapis.com/kubernetes-release/release/v1.28.0/bin/linux/${ARCH}/kube-scheduler"
 
-chmod +x kube-apiserver kube-controller-manager kube-scheduler kubectl
-sudo mv kube-apiserver kube-controller-manager kube-scheduler kubectl /usr/local/bin/
+chmod +x kube-apiserver kube-controller-manager kube-scheduler
+sudo mv kube-apiserver kube-controller-manager kube-scheduler /usr/local/bin/
 
 sudo mkdir -p /var/lib/kubernetes/
 cd certs
 sudo mv ca.pem ca-key.pem kubernetes-key.pem kubernetes.pem \
   service-account-key.pem service-account.pem \
-  encryption-config.yaml /var/lib/kubernetes/
+  /var/lib/kubernetes/
 cd ..
 
-INTERNAL_IP="127.0.0.1"
+mv encryption-config.yaml /var/lib/kubernetes
 
+INTERNAL_IP="127.0.0.1"
+cd certs
 sudo mv kube-controller-manager.kubeconfig /var/lib/kubernetes/
 sudo mv kube-scheduler.kubeconfig /var/lib/kubernetes/
 sudo mv kube-scheduler.yaml /etc/kubernetes/config/
+cd ..
 
 cat <<EOF | sudo tee /etc/systemd/system/kube-apiserver.service
 [Unit]
