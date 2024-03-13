@@ -7,7 +7,7 @@ cfssl gencert \
   admin-csr.json | cfssljson -bare admin
 
 HOSTNAME=$(hostname -s)
-for instance in HOSTNAME; do
+for instance in $HOSTNAME; do
 cat > ${instance}-csr.json <<EOF
 {
   "CN": "system:node:${instance}",

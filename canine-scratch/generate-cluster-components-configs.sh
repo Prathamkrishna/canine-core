@@ -2,7 +2,7 @@ KUBERNETES_PUBLIC_ADDRESS="127.0.0.1"
 
 HOSTNAME=$(hostname -s)
 
-for instance in HOSTNAME; do
+for instance in $HOSTNAME; do
   kubectl config set-cluster kubernetes-the-hard-way \
     --certificate-authority=ca.pem \
     --embed-certs=true \

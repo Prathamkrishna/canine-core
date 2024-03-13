@@ -12,3 +12,4 @@ cd certs
 source ../generate-cluster-components-configs.sh
 cd ..
 source bootstrap-kubernetes-controller.sh
+source generate-workers.sh
