@@ -6,8 +6,8 @@ cfssl gencert \
   -profile=kubernetes \
   admin-csr.json | cfssljson -bare admin
 
-
-for instance in node0; do
+HOSTNAME=$(hostname -s)
+for instance in HOSTNAME; do
 cat > ${instance}-csr.json <<EOF
 {
   "CN": "system:node:${instance}",

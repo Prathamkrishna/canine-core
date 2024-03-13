@@ -14,7 +14,7 @@ sudo cp ca.pem kubernetes-key.pem kubernetes.pem /etc/etcd/
 cd ../etcd
 
 INTERNAL_IP="127.0.0.1"
-ETCD_NAME="etcd-cluster"
+ETCD_NAME=$(hostname -s)
 
 cat <<EOF | sudo tee /etc/systemd/system/etcd.service
 [Unit]
