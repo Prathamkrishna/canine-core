@@ -58,15 +58,18 @@ cat <<EOF | sudo tee /etc/cni/net.d/99-loopback.conf
 }
 EOF
 sudo mkdir -p /etc/containerd/
-cat << EOF | sudo tee /etc/containerd/config.toml
-[plugins]
-  [plugins.cri.containerd]
-    snapshotter = "overlayfs"
-    [plugins.cri.containerd.default_runtime]
-      runtime_type = "io.containerd.runtime.v1.linux"
-      runtime_engine = "/usr/local/bin/runc"
-      runtime_root = ""
-EOF
+# cat << EOF | sudo tee /etc/containerd/config.toml
+# [plugins]
+#   [plugins.cri.containerd]
+#     snapshotter = "overlayfs"
+#     [plugins.cri.containerd.default_runtime]
+#       runtime_type = "io.containerd.runtime.v1.linux"
+#       runtime_engine = "/usr/local/bin/runc"
+#       runtime_root = ""
+# EOF
+
+mv config.toml /etc/containerd/
+
 cat <<EOF | sudo tee /etc/systemd/system/containerd.service
 [Unit]
 Description=containerd container runtime
