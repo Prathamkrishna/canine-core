@@ -29,6 +29,8 @@ chmod +x crictl kube-proxy kubelet runc
 sudo mv crictl kube-proxy kubelet runc /usr/local/bin/
 sudo mv containerd/bin/* /bin/
 
+# mkdir /sys/fs/cgroup/systemd
+# mount -t cgroup -o none,name=systemd cgroup /sys/fs/cgroup/systemd
 
 POD_CIDR=10.200.0.0/22
 cat <<EOF | sudo tee /etc/cni/net.d/10-bridge.conf
@@ -127,7 +129,7 @@ ExecStart=/usr/local/bin/kubelet \\
   --config=/var/lib/kubelet/kubelet-config.yaml \\
   --container-runtime-endpoint=unix:///var/run/containerd/containerd.sock \\
   --kubeconfig=/var/lib/kubelet/kubeconfig \\
-  --cgroup-driver=systemd
+  --cgroup-driver=cgroupfs
   --register-node=true \\
   --v=2
 Restart=on-failure
