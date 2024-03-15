@@ -127,6 +127,7 @@ ExecStart=/usr/local/bin/kubelet \\
   --config=/var/lib/kubelet/kubelet-config.yaml \\
   --container-runtime-endpoint=unix:///var/run/containerd/containerd.sock \\
   --kubeconfig=/var/lib/kubelet/kubeconfig \\
+  --cgroup-driver=systemd
   --register-node=true \\
   --v=2
 Restart=on-failure
