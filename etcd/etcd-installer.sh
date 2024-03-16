@@ -1,4 +1,9 @@
-ARCH="arm64"
+arch=$(uname -i)
+if [[ $arch == x86_64* ]]; then
+    ARCH="amd64"
+elif  [[ $arch == arm* ]] || [[ $arch = aarch64 ]]; then
+    ARCH="arm64"
+fi
 wget -q --show-progress --https-only --timestamping \
   "https://github.com/etcd-io/etcd/releases/download/v3.5.12/etcd-v3.5.12-linux-${ARCH}.tar.gz"
 

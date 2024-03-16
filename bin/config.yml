@@ -1,4 +1,0 @@
-isKubernetesInstalled: false
-kubernetesVersion: 1.29
-kubeadmVersion: 1.27
-kubeletVersion: 1

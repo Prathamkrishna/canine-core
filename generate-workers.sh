@@ -2,7 +2,12 @@ sudo apt-get update
 sudo apt-get -y install socat conntrack ipset
 
 sudo swapoff -a
-ARCH="arm64"
+arch=$(uname -i)
+if [[ $arch == x86_64* ]]; then
+    ARCH="amd64"
+elif  [[ $arch == arm* ]] || [[ $arch = aarch64 ]]; then
+    ARCH="arm64"
+fi
 
 wget -q --show-progress --https-only --timestamping \
   https://github.com/kubernetes-sigs/cri-tools/releases/download/v1.28.0/crictl-v1.28.0-linux-${ARCH}.tar.gz \

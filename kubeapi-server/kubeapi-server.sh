@@ -1,5 +1,10 @@
 node_IP=127.0.0.1
-ARCH="arm64"
+arch=$(uname -i)
+if [[ $arch == x86_64* ]]; then
+    ARCH="amd64"
+elif  [[ $arch == arm* ]] || [[ $arch = aarch64 ]]; then
+    ARCH="arm64"
+fi
 curl -L -O https://dl.k8s.io/v1.9.2/kubernetes-server-linux-${ARCH}.tar.gz
 tar -xzvf kubernetes-server-linux-${ARCH}.tar.gz
 mkdir -p /usr/k8s/bin/

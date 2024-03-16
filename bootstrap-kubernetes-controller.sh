@@ -1,6 +1,11 @@
 sudo mkdir -p /etc/kubernetes/config
 
-ARCH="arm64"
+arch=$(uname -i)
+if [[ $arch == x86_64* ]]; then
+    ARCH="amd64"
+elif  [[ $arch == arm* ]] || [[ $arch = aarch64 ]]; then
+    ARCH="arm64"
+fi
 
 wget -q --show-progress --https-only --timestamping \
   "https://storage.googleapis.com/kubernetes-release/release/v1.28.0/bin/linux/${ARCH}/kube-apiserver" \
@@ -108,3 +113,4 @@ EOF
 sudo systemctl daemon-reload
 sudo systemctl enable kube-apiserver kube-controller-manager kube-scheduler
 sudo systemctl start kube-apiserver kube-controller-manager kube-scheduler
+
