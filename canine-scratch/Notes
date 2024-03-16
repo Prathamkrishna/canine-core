@@ -14,3 +14,7 @@ service/kube-dns created
 use 2x4 config
 edit the config.toml by https://github.com/containerd/cri/blob/master/docs/config.md
 get config.toml for runc - do kubeadm init and get it.
+
+
+
+# check and install runc i think we missed it
