@@ -20,7 +20,7 @@ cd canine-core-canine-installer-v1
 source start.sh
 ```
 
-After a complete installation, the following components will be installer:
+After a complete installation, the following components will be installed:
 - cfssl and cfssljson
 - external standalone etcd cluster with single-node
 - kube-apiserver, kube-controller-manager, kube-scheduler
