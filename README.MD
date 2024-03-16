@@ -1,4 +1,4 @@
-# Canine - A <a href="https://kubernetes.io/">kubernetes</> installer for bare metal/private cloud environments.
+# Canine - A <a href="https://kubernetes.io/">kubernetes</a> installer for bare metal/private cloud environments.
 
 Please note:
 - Only supports Debian linux(and any other linux if it has `apt` installed. This is being tracked on https://github.com/Prathamkrishna/canine-core/issues/3
