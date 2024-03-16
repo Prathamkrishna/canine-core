@@ -32,4 +32,4 @@ After a complete installation, the following components will be installer:
 - kube-proxy
 - crictl
 
-## **Happy canine-ing!**
+**Happy canine-ing!**
