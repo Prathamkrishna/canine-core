@@ -35,6 +35,6 @@ Apart from the above, you will also require to install a few packages:
 -> socat
 -> conntrack
 
-`echo 1 > /proc/sys/net/ipv4/ip_forward`
-`modprobe br_netfilter`
+echo 1 > /proc/sys/net/ipv4/ip_forward
+modprobe br_netfilter
 

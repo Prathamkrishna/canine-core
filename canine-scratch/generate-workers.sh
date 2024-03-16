@@ -24,9 +24,8 @@ mkdir containerd
 tar -xvf crictl-v1.28.0-linux-${ARCH}.tar.gz
 tar -xvf containerd-1.7.14-linux-${ARCH}.tar.gz -C containerd
 sudo tar -xvf cni-plugins-linux-${ARCH}-v1.4.0.tgz -C /opt/cni/bin/
-sudo mv runc.${ARCH} runc
-chmod +x crictl kube-proxy kubelet runc 
-sudo mv crictl kube-proxy kubelet runc /usr/local/bin/
+chmod +x crictl kube-proxy kubelet 
+sudo mv crictl kube-proxy kubelet /usr/local/bin/
 sudo mv containerd/bin/* /bin/
 
 # mkdir /sys/fs/cgroup/systemd
@@ -68,33 +67,27 @@ sudo mkdir -p /etc/containerd/
 #       runtime_root = ""
 # EOF
 
-mv config.toml /etc/containerd/
+mv config.toml /etc/containerd/config.toml
+
+install -m 755 runc.${ARCH} /usr/local/sbin/runc
 
 cat <<EOF | sudo tee /etc/systemd/system/containerd.service
 [Unit]
 Description=containerd container runtime
 Documentation=https://containerd.io
-After=network.target local-fs.target
+After=network.target
 
 [Service]
-ExecStartPre=-/sbin/modprobe overlay
-ExecStart=/usr/local/bin/containerd
-
-Type=notify
-Delegate=yes
-KillMode=process
+ExecStartPre=/sbin/modprobe overlay
+ExecStart=/bin/containerd
 Restart=always
 RestartSec=5
-
-# Having non-zero Limit*s causes performance problems due to accounting overhead
-# in the kernel. We recommend using cgroups to do container-local accounting.
+Delegate=yes
+KillMode=process
+OOMScoreAdjust=-999
+LimitNOFILE=1048576
 LimitNPROC=infinity
 LimitCORE=infinity
-
-# Comment TasksMax if your systemd version does not supports it.
-# Only systemd 226 and above support this version.
-TasksMax=infinity
-OOMScoreAdjust=-999
 
 [Install]
 WantedBy=multi-user.target
