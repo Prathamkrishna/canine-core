@@ -1,40 +1,35 @@
-> Note: The current version of the product only supports arm64 installations on linux. This is currently being tracked in issue #
+# Canine - A <a href="https://kubernetes.io/">kubernetes</> installer for bare metal/private cloud environments.
 
-To startup:
+Please note:
+- Only supports Debian linux(and any other linux if it has `apt` installed. This is being tracked on https://github.com/Prathamkrishna/canine-core/issues/3
+- Canine will install containerd by default along with runc. Future releases will have an optional CRI installer and will allow you to point to any existing CRI.
+- Canine only supports a single node installation. Multiple node installer will be available with future releases for both Etcd and Kubernetes cluster.
 
-Run ```
-wget https://github.com/Prathamkrishna/canine-core/archive/refs/tags/v0.0.2.tar.gz
-tar -xzf v0.0.2.tar.gz
-rm v0.0.2.tar.gz
-cd canine-core-0.0.2
+## How to install canine?
+1. Run the following command to pull canine release onto your computer:
+```
+wget https://github.com/Prathamkrishna/canine-core/archive/refs/tags/canine-installer-v1.tar.gz
+```
+2. Unzip the tar using the following command:
+```
+tar -xzf canine-installer-v1.tar.gz
+```
+3. Move into the directory and initiate the installer script.
+```
+cd canine-core-canine-installer-v1
+source start.sh
 ```
 
-Execute `source ./main.sh` after downloading to set canine on local shell.
+After a complete installation, the following components will be installer:
+- cfssl and cfssljson
+- external standalone etcd cluster with single-node
+- kube-apiserver, kube-controller-manager, kube-scheduler
+- kubectl tool
+- kubelet
+- runc
+- containerd
+- cni-tools
+- kube-proxy
+- crictl
 
-Post that, you can run the commands as per:
-`canine help`.
-
-Please run the following commands if you see the below errors:
-
-	[WARNING FileExisting-socat]: socat not found in system path
-error execution phase preflight: [preflight] Some fatal errors occurred:
-	[ERROR FileExisting-crictl]: crictl not found in system path
-	[ERROR FileExisting-conntrack]: conntrack not found in system path
-	[ERROR FileContent--proc-sys-net-bridge-bridge-nf-call-iptables]: /proc/sys/net/bridge/bridge-nf-call-iptables does not exist
-	[ERROR FileContent--proc-sys-net-ipv4-ip_forward]: /proc/sys/net/ipv4/ip_forward contents are not set to 1
-
-
-```
-VERSION=v1.26.0
-wget https://github.com/kubernetes-sigs/cri-tools/releases/download/$VERSION/crictl-$VERSION-linux-arm64.tar.gz
-sudo tar zxvf crictl-$VERSION-linux-arm64.tar.gz -C /usr/local/bin
-rm -f crictl-$VERSION-linux-arm64.tar.gz
-```
-
-Apart from the above, you will also require to install a few packages:
--> socat
--> conntrack
-
-echo 1 > /proc/sys/net/ipv4/ip_forward
-modprobe br_netfilter
-
+Happy canine-ing!
