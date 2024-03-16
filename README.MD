@@ -22,7 +22,7 @@ source start.sh
 
 After a complete installation, the following components will be installed:
 - cfssl and cfssljson
-- external standalone etcd cluster with single-node
+- stacked standalone etcd cluster with single-node
 - kube-apiserver, kube-controller-manager, kube-scheduler
 - kubectl tool
 - kubelet
