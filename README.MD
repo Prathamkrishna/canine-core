@@ -6,6 +6,7 @@ Please note:
 - Canine only supports a single node installation. Multiple node installer will be available with future releases for both Etcd and Kubernetes cluster.
 
 ## How to install canine?
+Note: `sudo -i` Sudo into the machine and run the below commands
 1. Run the following command to pull canine release onto your computer:
 ```
 wget https://github.com/Prathamkrishna/canine-core/archive/refs/tags/canine-installer-v1.tar.gz
