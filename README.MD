@@ -9,15 +9,15 @@ Please note:
 Note: `sudo -i` Sudo into the machine and run the below commands
 1. Run the following command to pull canine release onto your computer:
 ```
-wget https://github.com/Prathamkrishna/canine-core/archive/refs/tags/canine-installer-v1.tar.gz
+wget https://github.com/Prathamkrishna/canine-core/archive/refs/tags/canine-installer-v1-patch.tar.gz
 ```
 2. Unzip the tar using the following command:
 ```
-tar -xzf canine-installer-v1.tar.gz
+tar -xzf canine-installer-v1-patch.tar.gz
 ```
 3. Move into the directory and initiate the installer script.
 ```
-cd canine-core-canine-installer-v1
+cd canine-core-canine-installer-v1-patch
 source start.sh
 ```
 
